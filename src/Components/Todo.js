@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const MiniTodo = () => {
-    const [todo, setTodo] = useState([])
+    const [todo, setTodo] = useState(() => {
+        const savedTodos = localStorage.getItem("todos")
+        return savedTodos ? JSON.parse(savedTodos) : []
+    })
     const [inputText, setInputText] = useState("")
 
     const handleInputChange = (e) => {
@@ -35,9 +38,13 @@ const MiniTodo = () => {
         setTodo(filteredTodo)
     }
 
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todo))
+    }, [todo])
+
     return (
-        <div className="flex justify-center mt-0">
-            <div className="bg-gray-900 text-white w-full max-w-md p-6 rounded-bottom-xl shadow-lg">
+        <div className="flex justify-center mt-1">
+            <div className="bg-gray-900 text-white w-full max-w-md p-6 rounded-xl shadow-lg">
                 <h1 className="text-2xl font-bold text-center mb-6">✨ Todo List</h1>
 
                 {/* Input + Button */}
