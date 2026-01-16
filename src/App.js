@@ -1,9 +1,9 @@
-import TodoWrapper from "./Components/TodoWrapper";
+import MiniTodo from "./Components/Todo";
 
 function App() {
   return (
     <div >
-      <TodoWrapper />
+      <MiniTodo />
     </div>
   );
 }
